@@ -1,0 +1,66 @@
+{
+  "name": "shared.api.pet_rescue",
+  "version": "1.0.0",
+  "description": "Shared Backend Code For Pet Rescue Project",
+  "main": "index.ts",
+  "scripts": {
+    "test": "nyc --clean --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --config ./mocharc.js --exit --timeout 5000",
+    "test:all": "npm test ./tests/**/*.spec.ts",
+    "build": "rm -rf dist && tsc && node dist/index.js",
+    "deploy": "npm run build && git add . && git commit -m \"deploy new code\" && git push origin master"
+  },
+  "author": "huy.tq@pinetech.vn",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.12.4",
+    "ajv-moment": "^2.0.4",
+    "amqplib": "^0.6.0",
+    "axios": "^0.21.1",
+    "bottleneck": "^2.19.5",
+    "exceljs": "^4.1.1",
+    "inversify": "5.0.1",
+    "inversify-binding-decorators": "4.0.0",
+    "kafka-node": "^5.0.0",
+    "log4js": "^6.3.0",
+    "module-alias": "^2.2.2",
+    "moment": "^2.27.0",
+    "redis": "^3.0.2",
+    "reflect-metadata": "0.1.12",
+    "sequelize": "5.22.3",
+    "sequelize-typescript": "^1.1.0",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.17",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.2.0",
+    "@types/module-alias": "^2.0.0",
+    "@types/redis": "^2.8.27",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "ts-node": "7.0.1",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.1.3",
+    "tslint-config-airbnb": "^5.11.0",
+    "typescript": "3.7.5"
+  },
+  "_moduleAliases": {
+    "@src.shared": "dist/src"
+  },
+  "nyc": {
+    "extension": [
+      ".js"
+    ],
+    "require": [
+      "ts-node/register",
+      "reflect-metadata",
+      "tsconfig-paths/register"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "clean": true
+  }
+}

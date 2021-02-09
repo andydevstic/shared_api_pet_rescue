@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "Commonjs",
+    "target": "es6",
+    "lib": [
+      "es6",
+      "dom",
+    ],
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "outDir": "./dist",
+    "paths": {
+      "@src.shared/*": [
+        "src/*"
+      ],
+      "@shared.general.shopping": [
+        "./node_modules/shared.general.shopping/dist"
+      ]
+    },
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node_modules",
+  ]
+}
