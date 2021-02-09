@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "module": "Commonjs",
     "target": "es6",
+    "strictPropertyInitialization": false,
     "lib": [
       "es6",
       "dom",

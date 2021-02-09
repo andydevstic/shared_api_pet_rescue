@@ -7,6 +7,7 @@ import { APP_ENV, EXCEL_FONTS, FILTER_OPERATORS, GatewayTypes, InMemmoryGatewayN
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
 export declare type TaskFunction = () => any;
+export declare type LoggingModuleName = string;
 export interface IWorkerEventService {
     pushEvent(entityName: WORKER_EVENT_ENTITY_NAMES, eventName: WorkerEventAction, objectIds: any[]): Promise<void>;
 }
@@ -201,6 +202,7 @@ export interface Subscription {
 export interface ILogger {
     info(message: string, ...args: any): void;
     error(message: string, ...args: any): void;
+    warn?(message: string, ...args: any): void;
 }
 export interface HttpClient {
     initialize(options: HttpClientOptions): void;

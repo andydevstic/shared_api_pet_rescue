@@ -23,7 +23,7 @@ export const SHARED_PROVIDER_TYPES = {
 
 export const SHARED_PLACEHOLDER_TYPES = {
   CONFIG: Symbol.for('CONFIG'),
-}
+};
 
 export enum LOG_LEVELS {
   WARN = 'warn',
@@ -151,7 +151,7 @@ export const SHARED_PROVIDER_NAMES = {
 
 export const SHARED_PLACEHOLDER_NAMES = {
   CONFIG: Symbol.for('CONFIG'),
-}
+};
 
 export enum APP_ENV {
   DEV = 'development',

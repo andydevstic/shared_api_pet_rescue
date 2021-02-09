@@ -18,6 +18,15 @@ export declare const SHARED_PROVIDER_TYPES: {
     VALIDATION_SCHEMA: symbol;
     DECORATOR: symbol;
 };
+export declare const SHARED_PLACEHOLDER_TYPES: {
+    CONFIG: symbol;
+};
+export declare enum LOG_LEVELS {
+    WARN = "warn",
+    INFO = "info",
+    DEBUG = "debug",
+    ERROR = "error"
+}
 export declare enum EXCEL_FONTS {
     TIMES_NEW_ROMAN = "Times New Roman",
     COMIC_SANS_MS = "Comic Sans MS",
@@ -106,6 +115,7 @@ export declare const SHARED_PROVIDER_NAMES: {
     EXCEL: string;
     EXCEL_STYLE: string;
     NUMBER: string;
+    LOG4JS: string;
     WORKER_EVENT_SERVICE: string;
     APP_EVENT: string;
     EVENT_TRANSLATOR: string;

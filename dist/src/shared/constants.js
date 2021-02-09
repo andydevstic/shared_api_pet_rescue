@@ -21,6 +21,16 @@ exports.SHARED_PROVIDER_TYPES = {
     VALIDATION_SCHEMA: Symbol('VALIDATION_SCHEMA'),
     DECORATOR: Symbol('DECORATOR'),
 };
+exports.SHARED_PLACEHOLDER_TYPES = {
+    CONFIG: Symbol.for('CONFIG'),
+};
+var LOG_LEVELS;
+(function (LOG_LEVELS) {
+    LOG_LEVELS["WARN"] = "warn";
+    LOG_LEVELS["INFO"] = "info";
+    LOG_LEVELS["DEBUG"] = "debug";
+    LOG_LEVELS["ERROR"] = "error";
+})(LOG_LEVELS = exports.LOG_LEVELS || (exports.LOG_LEVELS = {}));
 var EXCEL_FONTS;
 (function (EXCEL_FONTS) {
     EXCEL_FONTS["TIMES_NEW_ROMAN"] = "Times New Roman";
@@ -119,6 +129,7 @@ exports.SHARED_PROVIDER_NAMES = {
     EXCEL: 'EXCEL',
     EXCEL_STYLE: 'EXCEL_STYLE',
     NUMBER: 'NUMBER',
+    LOG4JS: 'LOG4JS',
     WORKER_EVENT_SERVICE: 'WORKER_EVENT_SERVICE',
     APP_EVENT: 'APP_EVENT',
     EVENT_TRANSLATOR: 'EVENT_TRANSLATOR',
