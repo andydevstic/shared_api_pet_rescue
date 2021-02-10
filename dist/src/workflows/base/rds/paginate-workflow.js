@@ -29,6 +29,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RdsPaginateWorkflow = void 0;
 const inversify_1 = require("inversify");
 const constants_1 = require("@src.shared/shared/constants");
 let RdsPaginateWorkflow = class RdsPaginateWorkflow {

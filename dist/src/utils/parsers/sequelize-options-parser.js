@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequelizeOptionsParser = void 0;
 const sequelize_1 = require("sequelize");
 const lodash_1 = require("lodash");
 const decorators_1 = require("@src.shared/infra/ioc/decorators");

@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ObjectUtil = void 0;
 const decorators_1 = require("@src.shared/infra/ioc/decorators");
 const constants_1 = require("@src.shared/shared/constants");
 let ObjectUtil = class ObjectUtil {

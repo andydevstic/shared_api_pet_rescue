@@ -20,6 +20,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RabbitMqClient = void 0;
 const amqplib_1 = require("amqplib");
 class RabbitMqClient {
     constructor(config, logger) {

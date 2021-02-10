@@ -11,6 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.KafkaProducer = void 0;
 const Kafka = require("kafka-node");
 class KafkaProducer {
     constructor(option, kafkaClient, logger) {

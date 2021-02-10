@@ -15,6 +15,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AxiosHttpClient = void 0;
 const axios_1 = require("axios");
 const decorators_1 = require("@src.shared/infra/ioc/decorators");
 const constants_1 = require("@src.shared/shared/constants");

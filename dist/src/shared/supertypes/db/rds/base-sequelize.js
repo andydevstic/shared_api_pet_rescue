@@ -18,6 +18,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SequelizeAdapter = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const inversify_1 = require("inversify");
 const constants_1 = require("@src.shared/shared/constants");

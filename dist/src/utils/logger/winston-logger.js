@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WinstonLogger = void 0;
 const winston_1 = require("winston");
 require("winston-daily-rotate-file");
 const decorators_1 = require("@src.shared/infra/ioc/decorators");

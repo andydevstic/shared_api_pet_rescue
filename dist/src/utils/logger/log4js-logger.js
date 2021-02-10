@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Log4JsLogger = void 0;
 const decorators_1 = require("@src.shared/infra/ioc/decorators");
 const constants_1 = require("@src.shared/shared/constants");
 const inversify_1 = require("inversify");

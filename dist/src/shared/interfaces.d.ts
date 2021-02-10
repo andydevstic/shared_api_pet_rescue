@@ -236,7 +236,7 @@ export interface HttpRequestOptions {
 export interface ISort {
     column?: string;
     dimension?: string;
-    direction?: string;
+    direction?: 'ASC' | 'DESC';
 }
 export interface PaginateResult<T> {
     docs: T[];

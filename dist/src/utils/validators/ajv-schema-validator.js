@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AjvSchemaValidator = void 0;
 const ajv = require("ajv");
 const ajv_moment_1 = require("ajv-moment");
 const moment = require("moment");

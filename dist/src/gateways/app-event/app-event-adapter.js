@@ -12,6 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppEventProxy = void 0;
 const decorators_1 = require("@src.shared/infra/ioc/decorators");
 const events_1 = require("events");
 const constants_1 = require("@src.shared/shared/constants");

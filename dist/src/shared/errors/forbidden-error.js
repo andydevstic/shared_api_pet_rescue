@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ForbiddenError = void 0;
 const base_error_1 = require("./base-error");
 const constants_1 = require("../constants");
 class ForbiddenError extends base_error_1.BaseError {

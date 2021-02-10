@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.properties = void 0;
 const constants_1 = require("@src.shared/shared/constants");
 exports.properties = {
     select: {

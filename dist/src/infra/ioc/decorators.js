@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.provideSingletonNamed = exports.provideNamed = exports.injectNamed = exports.provideSingleton = exports.provide = void 0;
 const inversify_1 = require("inversify");
 const inversify_binding_decorators_1 = require("inversify-binding-decorators");
 function provide(identifier) {

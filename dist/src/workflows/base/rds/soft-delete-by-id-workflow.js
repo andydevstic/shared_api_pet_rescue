@@ -18,6 +18,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RdsSoftDeleteByIdWorkflow = void 0;
 const inversify_1 = require("inversify");
 const constants_1 = require("@src.shared/shared/constants");
 let RdsSoftDeleteByIdWorkflow = class RdsSoftDeleteByIdWorkflow {

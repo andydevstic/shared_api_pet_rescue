@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WorksheetStyleWrapper = void 0;
 class WorksheetStyleWrapper {
     constructor() {
         this.cellStyle = {};

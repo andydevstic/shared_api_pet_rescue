@@ -11,6 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.KafkaSingleTopicConsumer = void 0;
 const errors_1 = require("@src.shared/shared/errors");
 const Kafka = require("kafka-node");
 class KafkaSingleTopicConsumer {

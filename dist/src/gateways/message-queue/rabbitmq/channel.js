@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RabbitMQChannel = void 0;
 class RabbitMQChannel {
     constructor(logger, connection, name) {
         this.logger = logger;
