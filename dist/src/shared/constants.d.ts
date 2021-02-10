@@ -86,10 +86,6 @@ export declare enum SORT_DIRECTIONS {
     ASC = "ascending",
     DESC = "descending"
 }
-export declare enum TableDataGatewayNames {
-    USER = "USER",
-    FIELD = "FIELD"
-}
 export declare enum InMemmoryGatewayNames {
     AUTH_TOKEN = "AUTH_TOKEN"
 }

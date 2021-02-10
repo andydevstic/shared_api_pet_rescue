@@ -9,7 +9,6 @@ import {
   GatewayTypes,
   InMemmoryGatewayNames,
   SCHEDULED_TASKS,
-  TableDataGatewayNames,
   TASK_SCHEDULER_RULES,
   VALIDATION_SCHEMAS,
   WorkerEventAction,
@@ -17,6 +16,7 @@ import {
 } from './constants';
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
+import { Repository } from 'sequelize-typescript';
 
 export type TaskFunction = () => any;
 export type LoggingModuleName = string;
@@ -24,6 +24,11 @@ export type LoggingModuleName = string;
 export interface ITransaction {
   commit(): Promise<void>;
   rollback(): Promise<void>;
+}
+
+export enum RepositoryTypes {
+  READ = 'READ',
+  WRITE = 'WRITE',
 }
 
 export interface IWorkerEventService {
@@ -39,7 +44,6 @@ export interface IObjectUtil {
   groupPropertyValueOfArray(array: any[], propsName: string): any[];
 }
 
-export type ITableDataGatewayRegistry = IRegistry<[TableDataGatewayNames, GatewayTypes]>;
 export type IInmemmoryGatewayRegistry = IRegistry<[InMemmoryGatewayNames, GatewayTypes]>;
 
 export type Task = (...args: any[]) => any;
@@ -72,7 +76,7 @@ export interface TaskRetryConfig {
 
 export interface IPaginateResult<Entity> {
   docs: Entity[];
-  total: number;
+  totalCount: number;
   limit: number;
   page: number;
 }
@@ -212,15 +216,33 @@ export type rdsParamCreateData = any;
 export type rdsParamCriteria = ICriteria;
 export type rdsParamTransaction = Transaction;
 
-export type IRdsFindWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<Entity[]>>;
-export type IRdsFindByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamCriteria?], Promise<Entity>>;
-export type IRdsDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>;
-export type IRdsCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData, rdsParamTransaction?], Promise<Entity>>;
-export type IRdsBulkSoftDeleteWorkflow = IWorkflow<[rdsParamId[], rdsParamTransaction?], Promise<void>>;
-export type IRdsBulkCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData[], rdsParamTransaction?], Promise<Entity[]>>;
-export type IRdsPaginateWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<IPaginateResult<Entity>>>;
-export type IRdsSoftDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>;
-export type IRdsUpdateByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamUpdateData, rdsParamTransaction?], Promise<Entity>>;
+export type IRdsFindWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<Entity[]>>
+  & { setRepository(repo: Repository<Entity>): IRdsFindWorkflow<Entity>; };
+
+export type IRdsFindByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamCriteria?], Promise<Entity>>
+  & { setRepository(repo: Repository<Entity>): IRdsFindByIdWorkflow<Entity>; };
+
+export type IRdsDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>
+  & { setRepository(repo: Repository<any>): IRdsDeleteByIdWorkflow; };
+
+export type IRdsCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData, rdsParamTransaction?], Promise<Entity>>
+  & { setRepository(repo: Repository<Entity>): IRdsCreateWorkflow<Entity>; };
+
+export type IRdsBulkSoftDeleteWorkflow = IWorkflow<[rdsParamId[], rdsParamTransaction?], Promise<void>>
+  & { setRepository(repo: Repository<any>): IRdsBulkSoftDeleteWorkflow; };
+
+export type IRdsBulkCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData[], rdsParamTransaction?], Promise<Entity[]>>
+  & { setRepository(repo: Repository<Entity>): IRdsBulkCreateWorkflow<Entity>; };
+
+export type IRdsPaginateWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<IPaginateResult<Entity>>>
+  & { setRepository(repo: Repository<Entity>): IRdsPaginateWorkflow<Entity>; };
+
+export type IRdsSoftDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>
+  & { setRepository(repo: Repository<any>): IRdsSoftDeleteByIdWorkflow; };
+
+export type IRdsUpdateByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamUpdateData, rdsParamTransaction?], Promise<Entity>>
+  & { setRepository(repo: Repository<Entity>): IRdsUpdateByIdWorkflow<Entity>; };
+
 
 export type AnyParams = any[];
 
@@ -228,10 +250,7 @@ export interface IWorkflow<Input extends AnyParams, Result> {
   execute(...args: Input): Result;
 }
 
-export interface RdsTransaction {
-  rollback(): Promise<void>;
-  commit(): Promise<void>;
-}
+export interface RdsTransaction extends Transaction {}
 
 export interface RedisGateway {
   getKey(key: string): string;
@@ -304,6 +323,18 @@ export interface ISort {
 export interface PaginateResult<T> {
   docs: T[];
   totalCount: number;
+}
+
+export interface ICrudRemoteFacade<T = any> {
+  find(context?: RequestContext): Promise<T[]>;
+  create(data: any, context?: RequestContext): Promise<void>;
+  updateById(id: any, data: any, context?: RequestContext): Promise<void>;
+  deleteById(id: any, data: any, context?: RequestContext): Promise<void>;
+}
+
+export interface RequestContext {
+  transaction?: RdsTransaction;
+  queryString: any;
 }
 
 export interface ICriteria {
