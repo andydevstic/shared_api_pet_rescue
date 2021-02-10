@@ -28,6 +28,7 @@
     "reflect-metadata": "0.1.12",
     "sequelize": "^6.5.0",
     "sequelize-typescript": "^2.0.0",
+    "typeorm": "^0.2.31",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   },

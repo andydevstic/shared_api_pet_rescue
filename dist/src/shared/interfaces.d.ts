@@ -8,11 +8,16 @@ import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
 export declare type TaskFunction = () => any;
 export declare type LoggingModuleName = string;
+export interface ITransaction {
+    commit(): Promise<void>;
+    rollback(): Promise<void>;
+}
 export interface IWorkerEventService {
     pushEvent(entityName: WORKER_EVENT_ENTITY_NAMES, eventName: WorkerEventAction, objectIds: any[]): Promise<void>;
 }
 export interface TransactionFactory<T> {
-    createTransaction(): Promise<T>;
+    createTransaction?(): Promise<T>;
+    createTransactionBox?(callback: (tx: any) => Promise<void>, ...args: any[]): Promise<void>;
 }
 export interface IObjectUtil {
     groupPropertyValueOfArray(array: any[], propsName: string): any[];

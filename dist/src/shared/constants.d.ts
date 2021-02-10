@@ -120,8 +120,8 @@ export declare const SHARED_PROVIDER_NAMES: {
     APP_EVENT: string;
     EVENT_TRANSLATOR: string;
     BOTTLENECK: string;
-    SEQUELIZE_READ: string;
-    SEQUELIZE_WRITE: string;
+    DATABASE_READ: string;
+    DATABASE_WRITE: string;
     REDIS_READ: string;
     SCHEDULED_TASK: string;
     TASK_SCHEDULER: string;

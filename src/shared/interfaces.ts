@@ -21,12 +21,18 @@ import { Options } from 'amqplib';
 export type TaskFunction = () => any;
 export type LoggingModuleName = string;
 
+export interface ITransaction {
+  commit(): Promise<void>;
+  rollback(): Promise<void>;
+}
+
 export interface IWorkerEventService {
   pushEvent(entityName: WORKER_EVENT_ENTITY_NAMES, eventName: WorkerEventAction, objectIds: any[]): Promise<void>;
 }
 
 export interface TransactionFactory<T> {
-  createTransaction(): Promise<T>;
+  createTransaction?(): Promise<T>;
+  createTransactionBox?(callback: (tx: any) => Promise<void>, ...args: any[]): Promise<void>;
 }
 
 export interface IObjectUtil {
