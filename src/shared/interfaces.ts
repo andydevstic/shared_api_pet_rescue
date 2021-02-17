@@ -17,6 +17,7 @@ import {
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
 import { Repository } from 'sequelize-typescript';
+import { BaseRedisGateway } from '@src.shared/gateways/inmemmory/redis/base/base-redis-gateway';
 
 export type TaskFunction = () => any;
 export type LoggingModuleName = string;
@@ -252,10 +253,6 @@ export interface IWorkflow<Input extends AnyParams, Result> {
 
 export interface RdsTransaction extends Transaction {}
 
-export interface RedisGateway {
-  getKey(key: string): string;
-}
-
 export interface IEventEmitter {
   on: EventEmitter['on'];
   emit: EventEmitter['emit'];
@@ -267,8 +264,10 @@ export interface IAppEventProxy {
   subscribeToEvent(eventName: APP_ENV, handler: any): Subscription;
 }
 
-export interface RedisReadGateway extends RedisGateway {
+export interface RedisReadGateway extends BaseRedisGateway {
   get(key: string): Promise<string>;
+  getByEntityId(entityId: string | number): Promise<any>;
+  hGetAll(key: string): Promise<any>;
   getHash(hashKey: string, field: string): Promise<string>;
 }
 
@@ -276,9 +275,12 @@ export interface IEventTranslator {
   translate(childEvent: APP_ENV): APP_ENV[];
 }
 
-export interface RedisWriteGateway extends RedisGateway {
+export interface RedisWriteGateway extends BaseRedisGateway {
   set(key: string, data: string, ttl?: number): Promise<void>;
+  setByEntityId(entityId: string | number, data: string, ttl?: number);
   setHash(hashKey: string, field: string, value: string): Promise<void>;
+  unSet(key: string): Promise<void>;
+  hmSet(key: string, objectData: object, ttl?: number): Promise<void>;
 }
 
 export interface Subscription {

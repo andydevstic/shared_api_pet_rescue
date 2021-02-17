@@ -5,7 +5,10 @@ class BaseRedisGateway {
     constructor(client) {
         this.client = client;
     }
-    getKey(key) {
+    getFormattedKey(key) {
+        if (this.platformPrefix) {
+            return `${this.platformPrefix}:${this.gatewayPrefix}:${key}`;
+        }
         return `${this.gatewayPrefix}:${key}`;
     }
 }
