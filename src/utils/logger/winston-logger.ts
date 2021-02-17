@@ -5,7 +5,7 @@ import { SHARED_PROVIDER_TYPES, SHARED_PROVIDER_NAMES, APP_ENV } from '@src.shar
 import { ILogger } from '@src.shared/shared/interfaces';
 
 @provideSingletonNamed(SHARED_PROVIDER_TYPES.LOGGER, SHARED_PROVIDER_NAMES.WINSTON)
-export class WinstonLogger implements ILogger {
+export class WinstonLogger implements Partial<ILogger> {
   private _infoLogger: Logger;
   private _errorLogger: Logger;
 

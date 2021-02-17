@@ -116,8 +116,8 @@ export declare const SHARED_PROVIDER_NAMES: {
     APP_EVENT: string;
     EVENT_TRANSLATOR: string;
     BOTTLENECK: string;
-    DATABASE_READ: string;
-    DATABASE_WRITE: string;
+    POSTGRES_READ: string;
+    POSTGRES_WRITE: string;
     REDIS_READ: string;
     SCHEDULED_TASK: string;
     TASK_SCHEDULER: string;

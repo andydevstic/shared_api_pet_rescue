@@ -290,7 +290,7 @@ export interface Subscription {
 export interface ILogger {
   info(message: string, ...args: any): void;
   error(message: string, ...args: any): void;
-  warn?(message: string, ...args: any): void;
+  warn(message: string, ...args: any): void;
 }
 
 export interface HttpClient {
@@ -327,11 +327,23 @@ export interface PaginateResult<T> {
   totalCount: number;
 }
 
-export interface ICrudRemoteFacade<T = any> {
-  find(context?: RequestContext): Promise<T[]>;
-  create(data: any, context?: RequestContext): Promise<void>;
-  updateById(id: any, data: any, context?: RequestContext): Promise<void>;
+export interface ICrudRemoteFacade<> {
+  find<T = any>(context?: RequestContext): Promise<FindAndCountAllResult<T>>;
+  create<T = any>(data: any, context?: RequestContext): Promise<T>;
+  updateById<T = any>(id: any, data: any, context?: RequestContext): Promise<T>;
   deleteById(id: any, data: any, context?: RequestContext): Promise<void>;
+}
+
+export interface FindAndCountAllResult<T = any> {
+  rows: T[];
+  count: number;
+}
+
+export interface ILruCache {
+  set(key: string, value: string, maxAgeInMilliSecs?: number): void;
+  get(key: string): string;
+  reset(): void;
+  has(key: string): boolean;
 }
 
 export interface RequestContext {

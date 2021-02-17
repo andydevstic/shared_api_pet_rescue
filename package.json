@@ -7,6 +7,7 @@
     "test": "nyc --clean --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --config ./mocharc.js --exit --timeout 5000",
     "test:all": "npm test ./tests/**/*.spec.ts",
     "build": "rm -rf dist && tsc && node dist/index.js",
+    "deploy:test": "yarn build && rm -rf ../api_pet_rescue/node_modules/shared.api.pet_rescue/dist && cp -rf ./dist ../api_pet_rescue/node_modules/shared.api.pet_rescue/",
     "deploy": "npm run build && git add . && git commit -m \"deploy new code\" && git push origin master"
   },
   "author": "huy.tq@pinetech.vn",
@@ -22,6 +23,7 @@
     "inversify-binding-decorators": "4.0.0",
     "kafka-node": "^5.0.0",
     "log4js": "^6.3.0",
+    "lru-cache": "^6.0.0",
     "module-alias": "^2.2.2",
     "moment": "^2.27.0",
     "redis": "^3.0.2",
@@ -35,6 +37,7 @@
   "devDependencies": {
     "@types/amqplib": "^0.5.17",
     "@types/chai": "^4.2.14",
+    "@types/lru-cache": "^5.1.0",
     "@types/mocha": "^8.2.0",
     "@types/module-alias": "^2.0.0",
     "@types/redis": "^2.8.27",
