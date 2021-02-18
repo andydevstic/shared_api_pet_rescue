@@ -1,3 +1,11 @@
-// export * from '../../workflows';
-export * from '../../gateways';
-export * from '../../utils';
+import '../../gateways';
+import '../../utils';
+import '../../shared/supertypes';
+
+import { buildProviderModule } from 'inversify-binding-decorators';
+
+import { appContainer } from './container';
+
+appContainer.load(buildProviderModule());
+
+export const container = appContainer;

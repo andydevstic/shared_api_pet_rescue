@@ -32,7 +32,7 @@ let LruCacheDecorator = class LruCacheDecorator {
     }
 };
 LruCacheDecorator = __decorate([
-    decorators_1.constructorProvide(constants_1.SHARED_PROVIDER_TYPES.CONSTRUCTOR, constants_1.SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR),
+    decorators_1.constructorProvideNamed(constants_1.SHARED_PROVIDER_TYPES.CONSTRUCTOR, constants_1.SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR),
     __metadata("design:paramtypes", [Object])
 ], LruCacheDecorator);
 exports.LruCacheDecorator = LruCacheDecorator;

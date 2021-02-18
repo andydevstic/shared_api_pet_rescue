@@ -6,6 +6,7 @@ export declare const SHARED_PROVIDER_TYPES: {
     FACADE: symbol;
     REGISTRY: symbol;
     PARSER: symbol;
+    CONTAINER: symbol;
     HTTP_CLIENT: symbol;
     FACTORY: symbol;
     ADAPTER: symbol;

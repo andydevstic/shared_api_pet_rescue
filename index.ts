@@ -5,7 +5,7 @@ moduleAlias.addAlias('@src.shared', `${__dirname}/src`);
 
 import 'module-alias/register';
 
-export { mergeContainer } from './src/infra/ioc/container';
+export { container } from './src/infra/ioc/loader';
 
 export * from './src/shared/constants';
 export * from './src/shared/interfaces';

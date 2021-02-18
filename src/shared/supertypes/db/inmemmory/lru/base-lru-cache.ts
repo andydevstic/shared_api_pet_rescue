@@ -1,9 +1,9 @@
-import { constructorProvide } from '@src.shared/infra/ioc/decorators';
+import { constructorProvideNamed } from '@src.shared/infra/ioc/decorators';
 import { SHARED_PROVIDER_NAMES, SHARED_PROVIDER_TYPES } from '@src.shared/shared/constants';
 import { Configuration, ILruCache } from '@src.shared/shared/interfaces';
 import * as LruCache from 'lru-cache';
 
-@constructorProvide(SHARED_PROVIDER_TYPES.CONSTRUCTOR, SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR)
+@constructorProvideNamed(SHARED_PROVIDER_TYPES.CONSTRUCTOR, SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR)
 export class LruCacheDecorator implements ILruCache {
   protected cacheInstance: LruCache<string, string>;
 

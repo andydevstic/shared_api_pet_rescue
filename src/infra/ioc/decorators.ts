@@ -17,9 +17,9 @@ export function injectNamed(identifier: symbol, name: any): ParameterDecorator {
   };
 }
 
-export function constructorProvide(identifier: symbol, name: string) {
+export function constructorProvideNamed(identifier: symbol, name: string) {
   return (constructor: Function) => {
-    appContainer.bind(identifier).toFunction(constructor).whenTargetNamed(name);
+    appContainer.bind(identifier).toConstantValue(constructor).whenTargetNamed(name);
   }
 }
 

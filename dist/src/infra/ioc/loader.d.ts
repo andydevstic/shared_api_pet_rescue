@@ -1,2 +1,4 @@
-export * from '../../gateways';
-export * from '../../utils';
+import '../../gateways';
+import '../../utils';
+import '../../shared/supertypes';
+export declare const container: import("inversify/dts/container/container").Container;
