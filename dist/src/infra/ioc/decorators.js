@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.provideSingletonNamed = exports.provideNamed = exports.injectNamed = exports.provideSingleton = exports.provide = void 0;
+exports.provideSingletonNamed = exports.provideNamed = exports.constructorProvide = exports.injectNamed = exports.provideSingleton = exports.provide = void 0;
 const inversify_1 = require("inversify");
 const inversify_binding_decorators_1 = require("inversify-binding-decorators");
+const container_1 = require("./container");
 function provide(identifier) {
     return inversify_binding_decorators_1.fluentProvide(identifier).done();
 }
@@ -18,6 +19,12 @@ function injectNamed(identifier, name) {
     };
 }
 exports.injectNamed = injectNamed;
+function constructorProvide(identifier, name) {
+    return (constructor) => {
+        container_1.appContainer.bind(identifier).toFunction(constructor).whenTargetNamed(name);
+    };
+}
+exports.constructorProvide = constructorProvide;
 function provideNamed(identifier, name) {
     return inversify_binding_decorators_1.fluentProvide(identifier)
         .whenTargetNamed(name)

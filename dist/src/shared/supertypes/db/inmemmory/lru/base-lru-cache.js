@@ -9,10 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BaseLruCache = void 0;
-const inversify_1 = require("inversify");
+exports.LruCacheDecorator = void 0;
+const decorators_1 = require("@src.shared/infra/ioc/decorators");
+const constants_1 = require("@src.shared/shared/constants");
 const LruCache = require("lru-cache");
-let BaseLruCache = class BaseLruCache {
+let LruCacheDecorator = class LruCacheDecorator {
     constructor(appConfig) {
         const cacheConfig = appConfig.get('cache.lru');
         this.cacheInstance = new LruCache(cacheConfig);
@@ -30,8 +31,8 @@ let BaseLruCache = class BaseLruCache {
         return this.cacheInstance.has(key);
     }
 };
-BaseLruCache = __decorate([
-    inversify_1.injectable(),
+LruCacheDecorator = __decorate([
+    decorators_1.constructorProvide(constants_1.SHARED_PROVIDER_TYPES.CONSTRUCTOR, constants_1.SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR),
     __metadata("design:paramtypes", [Object])
-], BaseLruCache);
-exports.BaseLruCache = BaseLruCache;
+], LruCacheDecorator);
+exports.LruCacheDecorator = LruCacheDecorator;

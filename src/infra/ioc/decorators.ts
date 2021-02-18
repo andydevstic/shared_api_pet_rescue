@@ -1,5 +1,6 @@
 import { inject, named } from 'inversify';
-import { fluentProvide,  } from 'inversify-binding-decorators';
+import { fluentProvide } from 'inversify-binding-decorators';
+import { appContainer } from './container';
 
 export function provide(identifier: symbol) {
   return fluentProvide(identifier).done();
@@ -14,6 +15,12 @@ export function injectNamed(identifier: symbol, name: any): ParameterDecorator {
     inject(identifier)(target, propertyKey, index);
     named(name)(target, propertyKey, index);
   };
+}
+
+export function constructorProvide(identifier: symbol, name: string) {
+  return (constructor: Function) => {
+    appContainer.bind(identifier).toFunction(constructor).whenTargetNamed(name);
+  }
 }
 
 export function provideNamed(identifier: symbol, name: string) {

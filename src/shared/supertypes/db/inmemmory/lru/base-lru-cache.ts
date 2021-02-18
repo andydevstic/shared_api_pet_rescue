@@ -1,10 +1,11 @@
+import { constructorProvide } from '@src.shared/infra/ioc/decorators';
+import { SHARED_PROVIDER_NAMES, SHARED_PROVIDER_TYPES } from '@src.shared/shared/constants';
 import { Configuration, ILruCache } from '@src.shared/shared/interfaces';
-import { injectable } from 'inversify';
 import * as LruCache from 'lru-cache';
 
-@injectable()
-export abstract class BaseLruCache implements ILruCache {
-  protected cacheInstance: LruCache<any, any>;
+@constructorProvide(SHARED_PROVIDER_TYPES.CONSTRUCTOR, SHARED_PROVIDER_NAMES.LRU_CACHE_DECORATOR)
+export class LruCacheDecorator implements ILruCache {
+  protected cacheInstance: LruCache<string, string>;
 
   constructor(appConfig: Configuration) {
     const cacheConfig = appConfig.get('cache.lru');

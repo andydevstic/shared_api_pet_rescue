@@ -283,6 +283,10 @@ export interface RedisWriteGateway extends BaseRedisGateway {
   hmSet(key: string, objectData: object, ttl?: number): Promise<void>;
 }
 
+export interface HashUtil {
+  hash(content: string | Buffer, hashBits?: number): string;
+}
+
 export interface Subscription {
   unsubscribe(): void;
 }
@@ -327,11 +331,11 @@ export interface PaginateResult<T> {
   totalCount: number;
 }
 
-export interface ICrudRemoteFacade<> {
-  find<T = any>(context?: RequestContext): Promise<FindAndCountAllResult<T>>;
-  create<T = any>(data: any, context?: RequestContext): Promise<T>;
-  updateById<T = any>(id: any, data: any, context?: RequestContext): Promise<T>;
-  deleteById(id: any, data: any, context?: RequestContext): Promise<void>;
+export interface ICrudRemoteFacade {
+  find(context?: RequestContext): Promise<FindAndCountAllResult<any>>;
+  create(data: any, context?: RequestContext): Promise<any>;
+  updateById(id: any, data: any, context?: RequestContext): Promise<any>;
+  deleteById(id: any, context?: RequestContext): Promise<void>;
 }
 
 export interface FindAndCountAllResult<T = any> {

@@ -18,3 +18,4 @@ __exportStar(require("./excels"), exports);
 __exportStar(require("./object"), exports);
 __exportStar(require("./event-translator"), exports);
 __exportStar(require("./flow-control"), exports);
+__exportStar(require("./hash"), exports);

@@ -6,3 +6,4 @@ export * from './excels';
 export * from './object';
 export * from './event-translator';
 export * from './flow-control';
+export * from './hash';

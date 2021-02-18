@@ -11,6 +11,7 @@ export declare const SHARED_PROVIDER_TYPES: {
     ADAPTER: symbol;
     PROXY: symbol;
     TASK_MANAGER: symbol;
+    CONSTRUCTOR: symbol;
     FAKE: symbol;
     SCHEMA_VALIDATOR: symbol;
     LOADER: symbol;
@@ -114,8 +115,10 @@ export declare const SHARED_PROVIDER_NAMES: {
     LOG4JS: string;
     WORKER_EVENT_SERVICE: string;
     APP_EVENT: string;
+    FNV_HASH: string;
     EVENT_TRANSLATOR: string;
     BOTTLENECK: string;
+    LRU_CACHE_DECORATOR: string;
     POSTGRES_READ: string;
     POSTGRES_WRITE: string;
     REDIS_READ: string;
