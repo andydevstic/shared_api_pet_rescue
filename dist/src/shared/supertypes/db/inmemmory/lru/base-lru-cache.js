@@ -14,9 +14,8 @@ const decorators_1 = require("@src.shared/infra/ioc/decorators");
 const constants_1 = require("@src.shared/shared/constants");
 const LruCache = require("lru-cache");
 let LruCacheDecorator = class LruCacheDecorator {
-    constructor(appConfig) {
-        const cacheConfig = appConfig.get('cache.lru');
-        this.cacheInstance = new LruCache(cacheConfig);
+    constructor(config) {
+        this.cacheInstance = new LruCache(config);
     }
     set(key, value, maxAgeInMilliSecs) {
         this.cacheInstance.set(key, value, maxAgeInMilliSecs);

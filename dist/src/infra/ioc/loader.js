@@ -4,7 +4,5 @@ exports.container = void 0;
 require("../../gateways");
 require("../../utils");
 require("../../shared/supertypes");
-const inversify_binding_decorators_1 = require("inversify-binding-decorators");
 const container_1 = require("./container");
-container_1.appContainer.load(inversify_binding_decorators_1.buildProviderModule());
 exports.container = container_1.appContainer;
