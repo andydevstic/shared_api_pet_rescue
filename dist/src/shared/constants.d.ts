@@ -122,6 +122,8 @@ export declare const SHARED_PROVIDER_NAMES: {
     LRU_CACHE_DECORATOR: string;
     POSTGRES_READ: string;
     POSTGRES_WRITE: string;
+    MONGO_READ: string;
+    MONGO_WRITE: string;
     REDIS_READ: string;
     SCHEDULED_TASK: string;
     TASK_SCHEDULER: string;
