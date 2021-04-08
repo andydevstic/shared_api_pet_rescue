@@ -213,12 +213,12 @@ export interface INumberParser {
 export type Callback = (error: any, data: any) => void;
 
 export interface ICrudRemoteFacade<T> {
-  find(context?: RequestContext): Promise<FindAndCountAllResult<T>>;
-  findById(id: any, context?: RequestContext): Promise<T>;
-  paginate(context?: RequestContext): Promise<PaginateResult<T>>;
-  create(data: any, context?: RequestContext): Promise<T>;
-  updateById(id: any, data: any, context?: RequestContext): Promise<T>;
-  deleteById(id: any, context?: RequestContext): Promise<void>;
+  find(option?: any): Promise<T[]>;
+  findById(id: any, option?: any): Promise<T>;
+  paginate(limit: number, offset: number, options?: any): Promise<PaginateResult<T>>;
+  create(data: any, option?: any): Promise<T>;
+  updateById(id: any, data: any, option?: any): Promise<T>;
+  deleteById(id: any, option?: any): Promise<void>;
 }
 
 export type AnyParams = any[];
@@ -309,9 +309,10 @@ export interface PaginateResult<T> {
 
 export interface IRepository<T> {
   find<O>(options?: O, ...args: any[]): Promise<T[]>;
-  findAndCountAll<O>(options?: O, ...args: any[]): Promise<FindAndCountAllResult<T>>;
+  paginate<O>(limit: number, offset: number, options?: O, ...args: any[]): Promise<T[]>;
   findById<O>(id: any, options?: O, ...args: any[]): Promise<T>;
-  count<O>(options?: O, ...args: any[]): Promise<number>;
+  countAll<O>(options?: O, ...args: any[]): Promise<number>;
+  estimatedCount<O>(options?: O, ...args: any[]): Promise<number>;
   create<O>(data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
   updateById<O>(id: any, data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
   deleteById<O>(id: any, options?: O, ...args: any[]): Promise<void>;
