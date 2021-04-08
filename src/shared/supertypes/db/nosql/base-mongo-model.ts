@@ -19,10 +19,9 @@ export abstract class MongoModel {
   protected abstract initSchema(): void;
 
   protected registerOwnMethods(): void {
-    this._schema.statics.deleteById = this._schema.statics.findByIdAndDelete;
-    this._schema.statics.updateById = this._schema.statics.findByIdAndUpdate;
-    this._schema.statics.countAll = this._schema.statics.countDocuments;
-    this._schema.statics.estimatedCount = this._schema.statics.estimatedDocumentCount;
+    this._schema.statics.deleteById = function(...args: any[]) { return this.findByIdAndDelete(...args)};
+    this._schema.statics.updateById = function(...args: any[]) { return this.findByIdAndUpdate(...args)};
+    this._schema.statics.count = function(...args: any[]) { return this.countDocuments(...args)};
     this._schema.statics.paginate = function(limit: number, offset: number, options?: any) {
       return this.find(options).skip(offset || 0).limit(limit);
     }

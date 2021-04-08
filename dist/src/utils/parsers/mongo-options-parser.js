@@ -17,6 +17,7 @@ let MongoOptionsParser = class MongoOptionsParser {
         const { filters, sort } = rawOptions;
         this.parseFilters(filters);
         this.parseSort(sort);
+        return this.parsedOptions;
     }
     parseFilters(filters) {
         if (!filters || !filters.length) {
@@ -26,9 +27,7 @@ let MongoOptionsParser = class MongoOptionsParser {
     }
     parseFilter(filter) {
         const { field, operator, value } = filter;
-        if (!field) {
-        }
-        switch (operator) {
+        switch (operator.toLowerCase()) {
             case constants_1.FILTER_OPERATORS.EQUALS:
                 this.parsedOptions[field] = { $eq: value };
                 return;
@@ -41,6 +40,8 @@ let MongoOptionsParser = class MongoOptionsParser {
             case constants_1.FILTER_OPERATORS.NOT_IN:
                 this.parsedOptions[field] = { $nin: value };
                 return;
+            default:
+                throw new Error(`Filter operator ${operator} not supported!`);
         }
     }
     parseSort(sort) {

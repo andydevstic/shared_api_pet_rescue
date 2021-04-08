@@ -311,7 +311,7 @@ export interface IRepository<T> {
   find<O>(options?: O, ...args: any[]): Promise<T[]>;
   paginate<O>(limit: number, offset: number, options?: O, ...args: any[]): Promise<T[]>;
   findById<O>(id: any, options?: O, ...args: any[]): Promise<T>;
-  countAll<O>(options?: O, ...args: any[]): Promise<number>;
+  count<O>(options?: O, ...args: any[]): Promise<number>;
   estimatedCount<O>(options?: O, ...args: any[]): Promise<number>;
   create<O>(data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
   updateById<O>(id: any, data: Partial<T>, options?: O, ...args: any[]): Promise<T>;

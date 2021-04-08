@@ -11,6 +11,8 @@ export class MongoOptionsParser implements IParser<any> {
 
     this.parseFilters(filters);
     this.parseSort(sort);
+
+    return this.parsedOptions;
   }
 
   protected parseFilters(filters: IFilter[]): void {
@@ -23,11 +25,8 @@ export class MongoOptionsParser implements IParser<any> {
 
   protected parseFilter(filter: IFilter): void {
     const { field, operator, value } = filter;
-    if (!field) {
-      
-    }
 
-    switch (operator) {
+    switch (operator.toLowerCase()) {
       case FILTER_OPERATORS.EQUALS:
         this.parsedOptions[field] = { $eq: value };
         return;
@@ -40,6 +39,8 @@ export class MongoOptionsParser implements IParser<any> {
       case FILTER_OPERATORS.NOT_IN:
         this.parsedOptions[field] = { $nin: value };
         return;
+      default:
+        throw new Error(`Filter operator ${operator} not supported!`);
     }
   }
 
