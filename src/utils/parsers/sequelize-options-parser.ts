@@ -102,55 +102,55 @@ export class SequelizeOptionsParser implements IParser<FindOptions> {
     const where: WhereOptions = {};
 
     filters.forEach((filter) => {
-      if (!filter.operator || !filter.code) {
+      if (!filter.operator || !filter.field) {
         return;
       }
 
       switch (filter.operator) {
         case 'equals':
-          where[filter.code] = filter.value;
+          where[filter.field] = filter.value;
           break;
         case 'not_equals':
-          where[filter.code] = { $not: filter.value };
+          where[filter.field] = { $not: filter.value };
           break;
         case 'contains':
-          where[filter.code] = { $like: `%${filter.value}%` };
+          where[filter.field] = { $like: `%${filter.value}%` };
           break;
         case 'does_not_contain':
-          where[filter.code] = { $notLike: `%${filter.value}%` };
+          where[filter.field] = { $notLike: `%${filter.value}%` };
           break;
         case 'contains_case_insensitive':
-          where[filter.code] = { $iLike: `%${filter.value}%` };
+          where[filter.field] = { $iLike: `%${filter.value}%` };
           break;
         case 'does_not_contain_case_insensitive':
-          where[filter.code] = { $notILike: `%${filter.value}%` };
+          where[filter.field] = { $notILike: `%${filter.value}%` };
           break;
         case 'starts_with':
-          where[filter.code] = { $like: `${filter.value}%` };
+          where[filter.field] = { $like: `${filter.value}%` };
           break;
         case 'ends_with':
-          where[filter.code] = { $like: `%${filter.value}` };
+          where[filter.field] = { $like: `%${filter.value}` };
           break;
         case 'in':
-          where[filter.code] = { $in: filter.value };
+          where[filter.field] = { $in: filter.value };
           break;
         case 'not_in':
-          where[filter.code] = { $notIn: filter.value };
+          where[filter.field] = { $notIn: filter.value };
           break;
         case 'is':
-          where[filter.code] = { $in: filter.value };
+          where[filter.field] = { $in: filter.value };
           break;
         case 'is_not':
-          where[filter.code] = { $notIn: filter.value };
+          where[filter.field] = { $notIn: filter.value };
           break;
         case 'is_greater_than':
-          where[filter.code] = { $gt: filter.value };
+          where[filter.field] = { $gt: filter.value };
           break;
         case 'is_smaller_than':
-          where[filter.code] = { $lt: filter.value };
+          where[filter.field] = { $lt: filter.value };
           break;
         case 'between':
-          where[filter.code] = { $between: filter.value };
+          where[filter.field] = { $between: filter.value };
           break;
         default:
           throw new BadRequestError(`Operator ${filter.operator} not supported`);

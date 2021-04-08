@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomErrors = exports.CURRENCIES = exports.FILTER_OPERATORS = exports.SHARED_WORKFLOW_NAMES = exports.WORKER_EVENT_ENTITY_NAMES = exports.APP_ENV = exports.SHARED_PLACEHOLDER_NAMES = exports.SHARED_PROVIDER_NAMES = exports.APP_EVENTS = exports.WorkerEventAction = exports.GatewayTypes = exports.InMemmoryGatewayNames = exports.SORT_DIRECTIONS = exports.VALIDATION_SCHEMAS = exports.SEQUELIZE_OPERATOR_ALIASES = exports.SCHEDULED_TASKS = exports.TASK_SCHEDULER_RULES = exports.EXCEL_FONTS = exports.LOG_LEVELS = exports.SHARED_PLACEHOLDER_TYPES = exports.SHARED_PROVIDER_TYPES = void 0;
+exports.CustomErrors = exports.CURRENCIES = exports.FILTER_OPERATORS = exports.SHARED_WORKFLOW_NAMES = exports.WORKER_EVENT_ENTITY_NAMES = exports.APP_ENV = exports.SHARED_PLACEHOLDER_NAMES = exports.SHARED_PROVIDER_NAMES = exports.DB_CONNECTION_TYPES = exports.APP_EVENTS = exports.WorkerEventAction = exports.GatewayTypes = exports.InMemmoryGatewayNames = exports.SORT_DIRECTIONS = exports.VALIDATION_SCHEMAS = exports.SEQUELIZE_OPERATOR_ALIASES = exports.SCHEDULED_TASKS = exports.TASK_SCHEDULER_RULES = exports.EXCEL_FONTS = exports.LOG_LEVELS = exports.SHARED_PLACEHOLDER_TYPES = exports.SHARED_PROVIDER_TYPES = void 0;
 const sequelize_1 = require("sequelize");
 exports.SHARED_PROVIDER_TYPES = {
     CONFIG: Symbol.for('CONFIG'),
@@ -117,6 +117,11 @@ var APP_EVENTS;
 (function (APP_EVENTS) {
     APP_EVENTS["USER_INTERUPT"] = "USER_INTERUPT";
 })(APP_EVENTS = exports.APP_EVENTS || (exports.APP_EVENTS = {}));
+var DB_CONNECTION_TYPES;
+(function (DB_CONNECTION_TYPES) {
+    DB_CONNECTION_TYPES["READ"] = "READ";
+    DB_CONNECTION_TYPES["WRITE"] = "WRITE";
+})(DB_CONNECTION_TYPES = exports.DB_CONNECTION_TYPES || (exports.DB_CONNECTION_TYPES = {}));
 exports.SHARED_PROVIDER_NAMES = {
     HTTP: 'HTTP',
     OBJECT: 'OBJECT',
@@ -125,6 +130,7 @@ exports.SHARED_PROVIDER_NAMES = {
     INMEMMORY_GATEWAY: 'INMEMMORY_GATEWAY',
     AXIOS: 'AXIOS',
     EXCEL: 'EXCEL',
+    MONGO_OPTIONS: 'MONGO_OPTIONS',
     EXCEL_STYLE: 'EXCEL_STYLE',
     NUMBER: 'NUMBER',
     LOG4JS: 'LOG4JS',
@@ -136,8 +142,6 @@ exports.SHARED_PROVIDER_NAMES = {
     LRU_CACHE_DECORATOR: 'LRU_CACHE_DECORATOR',
     POSTGRES_READ: 'POSTGRES_READ',
     POSTGRES_WRITE: 'POSTGRES_WRITE',
-    MONGO_READ: 'MONGO_READ',
-    MONGO_WRITE: 'MONGO_WRITE',
     REDIS_READ: 'REDIS_READ',
     SCHEDULED_TASK: 'SCHEDULED_TASK',
     TASK_SCHEDULER: 'TASK_SCHEDULER',

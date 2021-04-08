@@ -13,3 +13,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./rds"), exports);
 __exportStar(require("./inmemmory"), exports);
 __exportStar(require("./nosql"), exports);
+__exportStar(require("./gateway"), exports);

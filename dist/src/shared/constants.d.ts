@@ -103,6 +103,10 @@ export declare enum WorkerEventAction {
 export declare enum APP_EVENTS {
     USER_INTERUPT = "USER_INTERUPT"
 }
+export declare enum DB_CONNECTION_TYPES {
+    READ = "READ",
+    WRITE = "WRITE"
+}
 export declare const SHARED_PROVIDER_NAMES: {
     HTTP: string;
     OBJECT: string;
@@ -111,6 +115,7 @@ export declare const SHARED_PROVIDER_NAMES: {
     INMEMMORY_GATEWAY: string;
     AXIOS: string;
     EXCEL: string;
+    MONGO_OPTIONS: string;
     EXCEL_STYLE: string;
     NUMBER: string;
     LOG4JS: string;
@@ -122,8 +127,6 @@ export declare const SHARED_PROVIDER_NAMES: {
     LRU_CACHE_DECORATOR: string;
     POSTGRES_READ: string;
     POSTGRES_WRITE: string;
-    MONGO_READ: string;
-    MONGO_WRITE: string;
     REDIS_READ: string;
     SCHEDULED_TASK: string;
     TASK_SCHEDULER: string;

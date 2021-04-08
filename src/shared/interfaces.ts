@@ -16,7 +16,6 @@ import {
 } from './constants';
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
-import { Repository } from 'sequelize-typescript';
 import { BaseRedisGateway } from '@src.shared/gateways/inmemmory/redis/base/base-redis-gateway';
 
 export type TaskFunction = () => any;
@@ -110,7 +109,7 @@ export interface Configuration {
   get(key: string): any;
 }
 
-export interface ConnectionAdapter<T> {
+export interface ConnectionAdapter<T = any> {
   getConnection(): T;
 }
 
@@ -211,39 +210,16 @@ export interface INumberParser {
   tryParsePercentageOrZero(rawPercentage: string): number;
 }
 
-export type rdsParamId = string | number;
-export type rdsParamUpdateData = any;
-export type rdsParamCreateData = any;
-export type rdsParamCriteria = ICriteria;
-export type rdsParamTransaction = Transaction;
+export type Callback = (error: any, data: any) => void;
 
-export type IRdsFindWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<Entity[]>>
-  & { setRepository(repo: Repository<Entity>): IRdsFindWorkflow<Entity>; };
-
-export type IRdsFindByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamCriteria?], Promise<Entity>>
-  & { setRepository(repo: Repository<Entity>): IRdsFindByIdWorkflow<Entity>; };
-
-export type IRdsDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>
-  & { setRepository(repo: Repository<any>): IRdsDeleteByIdWorkflow; };
-
-export type IRdsCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData, rdsParamTransaction?], Promise<Entity>>
-  & { setRepository(repo: Repository<Entity>): IRdsCreateWorkflow<Entity>; };
-
-export type IRdsBulkSoftDeleteWorkflow = IWorkflow<[rdsParamId[], rdsParamTransaction?], Promise<void>>
-  & { setRepository(repo: Repository<any>): IRdsBulkSoftDeleteWorkflow; };
-
-export type IRdsBulkCreateWorkflow<Entity> = IWorkflow<[rdsParamCreateData[], rdsParamTransaction?], Promise<Entity[]>>
-  & { setRepository(repo: Repository<Entity>): IRdsBulkCreateWorkflow<Entity>; };
-
-export type IRdsPaginateWorkflow<Entity> = IWorkflow<[rdsParamCriteria], Promise<IPaginateResult<Entity>>>
-  & { setRepository(repo: Repository<Entity>): IRdsPaginateWorkflow<Entity>; };
-
-export type IRdsSoftDeleteByIdWorkflow = IWorkflow<[rdsParamId, rdsParamTransaction?], Promise<void>>
-  & { setRepository(repo: Repository<any>): IRdsSoftDeleteByIdWorkflow; };
-
-export type IRdsUpdateByIdWorkflow<Entity> = IWorkflow<[rdsParamId, rdsParamUpdateData, rdsParamTransaction?], Promise<Entity>>
-  & { setRepository(repo: Repository<Entity>): IRdsUpdateByIdWorkflow<Entity>; };
-
+export interface ICrudRemoteFacade<T> {
+  find(context?: RequestContext): Promise<FindAndCountAllResult<T>>;
+  findById(id: any, context?: RequestContext): Promise<T>;
+  paginate(context?: RequestContext): Promise<PaginateResult<T>>;
+  create(data: any, context?: RequestContext): Promise<T>;
+  updateById(id: any, data: any, context?: RequestContext): Promise<T>;
+  deleteById(id: any, context?: RequestContext): Promise<void>;
+}
 
 export type AnyParams = any[];
 
@@ -331,16 +307,19 @@ export interface PaginateResult<T> {
   totalCount: number;
 }
 
-export interface ICrudRemoteFacade {
-  find(context?: RequestContext): Promise<FindAndCountAllResult<any>>;
-  create(data: any, context?: RequestContext): Promise<any>;
-  updateById(id: any, data: any, context?: RequestContext): Promise<any>;
-  deleteById(id: any, context?: RequestContext): Promise<void>;
+export interface IRepository<T> {
+  find<O>(options?: O, ...args: any[]): Promise<T[]>;
+  findAndCountAll<O>(options?: O, ...args: any[]): Promise<FindAndCountAllResult<T>>;
+  findById<O>(id: any, options?: O, ...args: any[]): Promise<T>;
+  count<O>(options?: O, ...args: any[]): Promise<number>;
+  create<O>(data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
+  updateById<O>(id: any, data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
+  deleteById<O>(id: any, options?: O, ...args: any[]): Promise<void>;
 }
 
 export interface FindAndCountAllResult<T = any> {
-  rows: T[];
-  count: number;
+  docs: T[];
+  totalCount: number;
 }
 
 export interface ILruCache {
@@ -353,6 +332,15 @@ export interface ILruCache {
 export interface RequestContext {
   transaction?: RdsTransaction;
   queryString: any;
+}
+
+export enum HTTP_METHODS {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  OPTIONS = 'OPTIONS',
+  HEAD = 'HEAD',
+  DELETE = 'DELETE',
 }
 
 export interface ICriteria {
@@ -378,7 +366,7 @@ export interface IInclude {
 }
 
 export interface IFilter {
-  code: string;
+  field: string;
   operator: FILTER_OPERATORS;
   value: any;
 }
