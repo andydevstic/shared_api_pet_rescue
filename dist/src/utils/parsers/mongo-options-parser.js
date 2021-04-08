@@ -14,10 +14,29 @@ let MongoOptionsParser = class MongoOptionsParser {
         this.parsedOptions = {};
     }
     parse(rawOptions = {}) {
-        const { filters, sort } = rawOptions;
+        const { filters, sort, select } = rawOptions;
+        this.parseSelect(select);
         this.parseFilters(filters);
         this.parseSort(sort);
         return this.parsedOptions;
+    }
+    parseSelect(select) {
+        if (!select) {
+            return;
+        }
+        let selectFields = this.tryParseJsonOrNull(select) || select.split(',').map(i => i.trim());
+        this.parsedOptions.projections = selectFields.reduce((aggregated, selectField) => {
+            aggregated[selectField] = 1;
+            return aggregated;
+        }, {});
+    }
+    tryParseJsonOrNull(data) {
+        try {
+            return JSON.parse(data);
+        }
+        catch (error) {
+            return null;
+        }
     }
     parseFilters(filters) {
         if (!filters || !filters.length) {

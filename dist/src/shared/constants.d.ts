@@ -124,6 +124,7 @@ export declare const SHARED_PROVIDER_NAMES: {
     FNV_HASH: string;
     EVENT_TRANSLATOR: string;
     BOTTLENECK: string;
+    ERROR_MESSAGE: string;
     LRU_CACHE_DECORATOR: string;
     POSTGRES_READ: string;
     POSTGRES_WRITE: string;

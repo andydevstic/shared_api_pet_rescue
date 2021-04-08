@@ -213,12 +213,12 @@ export interface INumberParser {
 export type Callback = (error: any, data: any) => void;
 
 export interface ICrudRemoteFacade<T> {
-  find(option?: any): Promise<T[]>;
-  findById(id: any, option?: any): Promise<T>;
-  paginate(limit: number, offset: number, options?: any): Promise<PaginateResult<T>>;
-  create(data: any, option?: any): Promise<T>;
-  updateById(id: any, data: any, option?: any): Promise<T>;
-  deleteById(id: any, option?: any): Promise<void>;
+  find(option?: any, ...args: any[]): Promise<T[]>;
+  findById(id: any, option?: any, ...args: any[]): Promise<T>;
+  paginate(limit: number, offset: number, option?: any, ...args: any[]): Promise<PaginateResult<T>>;
+  create(data: any, option?: any, ...args: any[]): Promise<T>;
+  updateById(id: any, data: any, option?: any, ...args: any[]): Promise<T>;
+  deleteById(id: any, option?: any, ...args: any[]): Promise<void>;
 }
 
 export type AnyParams = any[];

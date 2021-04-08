@@ -22,8 +22,8 @@ export abstract class MongoModel {
     this._schema.statics.deleteById = function(...args: any[]) { return this.findByIdAndDelete(...args)};
     this._schema.statics.updateById = function(...args: any[]) { return this.findByIdAndUpdate(...args)};
     this._schema.statics.count = function(...args: any[]) { return this.countDocuments(...args)};
-    this._schema.statics.paginate = function(limit: number, offset: number, options?: any) {
-      return this.find(options).skip(offset || 0).limit(limit);
+    this._schema.statics.paginate = function(limit: number, offset: number, options?: any, projections?: string[]) {
+      return this.find(options, projections).skip(offset || 0).limit(limit);
     }
   }
 }

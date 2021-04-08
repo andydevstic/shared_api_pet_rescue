@@ -23,8 +23,8 @@ let MongoModel = class MongoModel {
         this._schema.statics.deleteById = function (...args) { return this.findByIdAndDelete(...args); };
         this._schema.statics.updateById = function (...args) { return this.findByIdAndUpdate(...args); };
         this._schema.statics.count = function (...args) { return this.countDocuments(...args); };
-        this._schema.statics.paginate = function (limit, offset, options) {
-            return this.find(options).skip(offset || 0).limit(limit);
+        this._schema.statics.paginate = function (limit, offset, options, projections) {
+            return this.find(options, projections).skip(offset || 0).limit(limit);
         };
     }
 };

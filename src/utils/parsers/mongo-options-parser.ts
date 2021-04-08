@@ -7,12 +7,35 @@ export class MongoOptionsParser implements IParser<any> {
   protected parsedOptions: any = {};
 
   public parse(rawOptions: ICriteria = {}): any {
-    const { filters, sort } = rawOptions;
+    const { filters, sort, select } = rawOptions;
 
+    this.parseSelect(select);
     this.parseFilters(filters);
     this.parseSort(sort);
 
     return this.parsedOptions;
+  }
+
+  protected parseSelect(select: string): void {
+    if (!select) {
+      return;
+    }
+
+    let selectFields: string[] = this.tryParseJsonOrNull(select) || select.split(',').map(i => i.trim());
+
+    this.parsedOptions.projections = selectFields.reduce((aggregated, selectField) => {
+      aggregated[selectField] = 1;
+
+      return aggregated;
+    }, {});
+  }
+
+  protected tryParseJsonOrNull(data: string): any {
+    try {
+      return JSON.parse(data);
+    } catch (error) {
+      return null;
+    }
   }
 
   protected parseFilters(filters: IFilter[]): void {
