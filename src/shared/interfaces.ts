@@ -215,10 +215,13 @@ export interface ICrudRemoteFacade<T> {
   find(option?: any, ...args: any[]): Promise<T[]>;
   findOne(options: any, ...args: any[]): Promise<T>
   findById(id: any, option?: any, ...args: any[]): Promise<T>;
+  findByObjectId(objectId: any, option?: any, ...args: any[]): Promise<T>;
   paginate(limit: number, offset: number, option?: any, ...args: any[]): Promise<PaginateResult<T>>;
   create(data: any, option?: any, ...args: any[]): Promise<T>;
   updateById(id: any, data: any, option?: any, ...args: any[]): Promise<T>;
+  updateByObjectId(id: any, data: any, option?: any, ...args: any[]): Promise<T>;
   deleteById(id: any, option?: any, ...args: any[]): Promise<void>;
+  deleteByObjectId(id: any, option?: any, ...args: any[]): Promise<void>;
 }
 
 export type AnyParams = any[];
@@ -313,11 +316,14 @@ export interface IRepository<T> {
   findOne<O>(options?: O, ...args: any[]): Promise<T>;
   paginate<O>(limit: number, offset: number, options?: O, ...args: any[]): Promise<T[]>;
   findById<O>(id: any, options?: O, ...args: any[]): Promise<T>;
+  findByObjectId<O>(id: any, options?: O, ...args: any[]): Promise<T>;
   count<O>(options?: O, ...args: any[]): Promise<number>;
   estimatedCount<O>(options?: O, ...args: any[]): Promise<number>;
   create<O>(data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
   updateById<O>(id: any, data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
+  updateByObjectId<O>(id: any, data: Partial<T>, options?: O, ...args: any[]): Promise<T>;
   deleteById<O>(id: any, options?: O, ...args: any[]): Promise<void>;
+  deleteByObjectId<O>(id: any, options?: O, ...args: any[]): Promise<void>;
 }
 
 export interface FindAndCountAllResult<T = any> {

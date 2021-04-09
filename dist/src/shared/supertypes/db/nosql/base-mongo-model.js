@@ -8,15 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoModel = void 0;
 const inversify_1 = require("inversify");
@@ -31,28 +22,16 @@ let MongoModel = class MongoModel {
         return this._schema;
     }
     registerOwnMethods() {
-        this._schema.statics.deleteById = function (...args) { return this.findByIdAndDelete(...args); };
-        this._schema.statics.updateById = function (...args) { return this.findByIdAndUpdate(...args); };
+        this._schema.statics.findById = function (id, ...args) { return this.findOne({ id }, ...args); };
+        this._schema.statics.findByObjectId = function (objectId, ...args) { return this.findById(objectId, ...args); };
+        this._schema.statics.deleteById = function (id, ...args) { return this.findOneAndDelete({ id }, ...args); };
+        this._schema.statics.deleteByObjectId = function (objectId, ...args) { return this.findByIdAndDelete(objectId, ...args); };
+        this._schema.statics.updateById = function (id, ...args) { return this.findOneAndUpdate({ id }, ...args); };
+        this._schema.statics.updateByObjectId = function (objectId, ...args) { return this.findByIdAndUpdate(objectId, ...args); };
         this._schema.statics.count = function (...args) { return this.countDocuments(...args); };
         this._schema.statics.paginate = function (limit, offset, options, projections) {
             return this.find(options, projections).skip(offset || 0).limit(limit);
         };
-    }
-    registerHookForAutoIncrement() {
-        if (!this.isHasIncrementId) {
-            return;
-        }
-        this._schema.post('save', function () {
-            return __awaiter(this, void 0, void 0, function* () {
-                const sequenceCollection = this.model('SEQUENCE');
-                yield sequenceCollection.findOneAndUpdate({
-                    collectionName: this.modelName,
-                    $inc: {
-                        id: 1,
-                    },
-                });
-            });
-        });
     }
 };
 MongoModel = __decorate([

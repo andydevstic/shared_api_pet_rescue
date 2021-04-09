@@ -8,5 +8,4 @@ export declare abstract class MongoModel {
     get schema(): Schema;
     protected abstract initSchema(): void;
     protected registerOwnMethods(): void;
-    registerHookForAutoIncrement(): void;
 }

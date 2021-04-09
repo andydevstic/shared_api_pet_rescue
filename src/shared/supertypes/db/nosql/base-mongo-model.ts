@@ -22,28 +22,18 @@ export abstract class MongoModel {
   protected abstract initSchema(): void;
 
   protected registerOwnMethods(): void {
-    this._schema.statics.deleteById = function(...args: any[]) { return this.findByIdAndDelete(...args)};
-    this._schema.statics.updateById = function(...args: any[]) { return this.findByIdAndUpdate(...args)};
+    this._schema.statics.findById = function(id: any, ...args: any[]) { return this.findOne({ id }, ...args)};
+    this._schema.statics.findByObjectId = function(objectId: any, ...args: any[]) { return this.findById(objectId, ...args)};
+
+    this._schema.statics.deleteById = function(id: any, ...args: any[]) { return this.findOneAndDelete({ id }, ...args)};
+    this._schema.statics.deleteByObjectId = function(objectId: any, ...args: any[]) { return this.findByIdAndDelete(objectId, ...args)};
+
+    this._schema.statics.updateById = function(id: any, ...args: any[]) { return this.findOneAndUpdate({ id }, ...args)};
+    this._schema.statics.updateByObjectId = function(objectId, ...args: any[]) { return this.findByIdAndUpdate(objectId, ...args)};
+
     this._schema.statics.count = function(...args: any[]) { return this.countDocuments(...args)};
     this._schema.statics.paginate = function(limit: number, offset: number, options?: any, projections?: string[]) {
       return this.find(options, projections).skip(offset || 0).limit(limit);
     }
-  }
-
-  public registerHookForAutoIncrement(): void {
-    if (!this.isHasIncrementId) {
-      return;
-    }
-
-    this._schema.post('save', async function() {
-      const sequenceCollection = this.model('SEQUENCE');
-
-      await sequenceCollection.findOneAndUpdate({
-        collectionName: this.modelName,
-        $inc: {
-          id: 1,
-        },
-      });
-    });
   }
 }
