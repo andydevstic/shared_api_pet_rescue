@@ -35,13 +35,13 @@ export abstract class MongoModel {
       return;
     }
 
-    this._schema.pre('save', async function() {
+    this._schema.post('save', async function() {
       const sequenceCollection = this.model('SEQUENCE');
 
       await sequenceCollection.findOneAndUpdate({
         collectionName: this.modelName,
         id: {
-          $incr: 1,
+          $inc: 1,
         },
       });
     });

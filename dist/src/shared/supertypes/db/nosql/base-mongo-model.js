@@ -42,13 +42,13 @@ let MongoModel = class MongoModel {
         if (!this.isHasIncrementId) {
             return;
         }
-        this._schema.pre('save', function () {
+        this._schema.post('save', function () {
             return __awaiter(this, void 0, void 0, function* () {
                 const sequenceCollection = this.model('SEQUENCE');
                 yield sequenceCollection.findOneAndUpdate({
                     collectionName: this.modelName,
                     id: {
-                        $incr: 1,
+                        $inc: 1,
                     },
                 });
             });

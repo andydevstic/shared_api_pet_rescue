@@ -213,6 +213,7 @@ export type Callback = (error: any, data: any) => void;
 
 export interface ICrudRemoteFacade<T> {
   find(option?: any, ...args: any[]): Promise<T[]>;
+  findOne(options: any, ...args: any[]): Promise<T>
   findById(id: any, option?: any, ...args: any[]): Promise<T>;
   paginate(limit: number, offset: number, option?: any, ...args: any[]): Promise<PaginateResult<T>>;
   create(data: any, option?: any, ...args: any[]): Promise<T>;
@@ -309,6 +310,7 @@ export interface PaginateResult<T> {
 
 export interface IRepository<T> {
   find<O>(options?: O, ...args: any[]): Promise<T[]>;
+  findOne<O>(options?: O, ...args: any[]): Promise<T>;
   paginate<O>(limit: number, offset: number, options?: O, ...args: any[]): Promise<T[]>;
   findById<O>(id: any, options?: O, ...args: any[]): Promise<T>;
   count<O>(options?: O, ...args: any[]): Promise<number>;
