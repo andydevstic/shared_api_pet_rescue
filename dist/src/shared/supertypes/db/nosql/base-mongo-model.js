@@ -47,8 +47,8 @@ let MongoModel = class MongoModel {
                 const sequenceCollection = this.model('SEQUENCE');
                 yield sequenceCollection.findOneAndUpdate({
                     collectionName: this.modelName,
-                    id: {
-                        $inc: 1,
+                    $inc: {
+                        id: 1,
                     },
                 });
             });

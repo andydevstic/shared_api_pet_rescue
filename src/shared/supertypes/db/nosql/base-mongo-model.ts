@@ -40,8 +40,8 @@ export abstract class MongoModel {
 
       await sequenceCollection.findOneAndUpdate({
         collectionName: this.modelName,
-        id: {
-          $inc: 1,
+        $inc: {
+          id: 1,
         },
       });
     });
