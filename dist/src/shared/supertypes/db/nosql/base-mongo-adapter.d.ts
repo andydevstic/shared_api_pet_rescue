@@ -9,5 +9,5 @@ export declare abstract class MongoDbAdapter implements ConnectionAdapter<Connec
     constructor(config: any, logger: ILogger);
     connect(): Promise<void>;
     getConnection(): Connection;
-    abstract loadModels(): void;
+    abstract loadModels(): Promise<void>;
 }

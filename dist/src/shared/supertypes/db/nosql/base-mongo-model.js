@@ -8,11 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoModel = void 0;
 const inversify_1 = require("inversify");
 let MongoModel = class MongoModel {
     constructor() {
+        this.isHasIncrementId = true;
+        this.startIdNumber = 1;
         this.initSchema();
         this.registerOwnMethods();
     }
@@ -26,6 +37,22 @@ let MongoModel = class MongoModel {
         this._schema.statics.paginate = function (limit, offset, options, projections) {
             return this.find(options, projections).skip(offset || 0).limit(limit);
         };
+    }
+    registerHookForAutoIncrement() {
+        if (!this.isHasIncrementId) {
+            return;
+        }
+        this._schema.pre('save', function () {
+            return __awaiter(this, void 0, void 0, function* () {
+                const sequenceCollection = this.model('SEQUENCE');
+                yield sequenceCollection.findOneAndUpdate({
+                    collectionName: this.modelName,
+                    id: {
+                        $incr: 1,
+                    },
+                });
+            });
+        });
     }
 };
 MongoModel = __decorate([

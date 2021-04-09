@@ -3,6 +3,9 @@ import { Schema } from "mongoose";
 
 @injectable()
 export abstract class MongoModel {
+  public isHasIncrementId = true;
+  public startIdNumber = 1;
+
   protected _schema: Schema;
 
   constructor() {
@@ -25,5 +28,22 @@ export abstract class MongoModel {
     this._schema.statics.paginate = function(limit: number, offset: number, options?: any, projections?: string[]) {
       return this.find(options, projections).skip(offset || 0).limit(limit);
     }
+  }
+
+  public registerHookForAutoIncrement(): void {
+    if (!this.isHasIncrementId) {
+      return;
+    }
+
+    this._schema.pre('save', async function() {
+      const sequenceCollection = this.model('SEQUENCE');
+
+      await sequenceCollection.findOneAndUpdate({
+        collectionName: this.modelName,
+        id: {
+          $incr: 1,
+        },
+      });
+    });
   }
 }

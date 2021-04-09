@@ -47,5 +47,5 @@ export abstract class MongoDbAdapter implements ConnectionAdapter<Connection> {
     return this._connection;
   }
 
-  public abstract loadModels(): void;
+  public abstract loadModels(): Promise<void>;
 }
