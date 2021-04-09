@@ -11,5 +11,5 @@ export declare class RabbitMqClientRegistry implements IRegistry<[string, string
     protected initRabbitMqConnection(rabbitMqConfig: Options.Connect & {
         connectionName: string;
     }): Promise<void>;
-    getClass(connectionName: string, channelName: string): RabbitMQChannel;
+    getInstance(connectionName: string, channelName: string): RabbitMQChannel;
 }

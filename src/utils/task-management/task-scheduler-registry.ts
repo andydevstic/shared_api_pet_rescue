@@ -13,7 +13,7 @@ export class TaskSchedulerRegistry implements ITaskSchedulerRegistry {
     private taskSchedulerFactory: ITaskSchedulerFactory,
   ) {}
 
-  public getClass(taskName: SCHEDULED_TASKS, scheduleRule: TASK_SCHEDULER_RULES): TaskScheduler {
+  public getInstance(taskName: SCHEDULED_TASKS, scheduleRule: TASK_SCHEDULER_RULES): TaskScheduler {
     const taskHashKey = this.getScheduleTaskHashKey(taskName, scheduleRule);
     const savedScheduledTask = this._savedScheduledTasks.get(taskHashKey);
     if (savedScheduledTask) {

@@ -21,7 +21,7 @@ let TaskSchedulerRegistry = class TaskSchedulerRegistry {
         this.taskSchedulerFactory = taskSchedulerFactory;
         this._savedScheduledTasks = new Map();
     }
-    getClass(taskName, scheduleRule) {
+    getInstance(taskName, scheduleRule) {
         const taskHashKey = this.getScheduleTaskHashKey(taskName, scheduleRule);
         const savedScheduledTask = this._savedScheduledTasks.get(taskHashKey);
         if (savedScheduledTask) {

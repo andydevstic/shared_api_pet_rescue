@@ -34,7 +34,7 @@ export class RabbitMqClientRegistry implements IRegistry<[string, string], Rabbi
     return;
   }
 
-  public getClass(connectionName: string, channelName: string): RabbitMQChannel {
+  public getInstance(connectionName: string, channelName: string): RabbitMQChannel {
     const client = this.connectionMap.get(connectionName);
 
     if (!client) {

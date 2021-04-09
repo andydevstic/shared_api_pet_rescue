@@ -16,7 +16,6 @@ import {
 } from './constants';
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
-import { BaseRedisGateway } from '@src.shared/gateways/inmemmory/redis/base/base-redis-gateway';
 
 export type TaskFunction = () => any;
 export type LoggingModuleName = string;
@@ -196,7 +195,7 @@ export interface ICellData {
 }
 
 export interface IRegistry<Input extends AnyParams, Instance = any> {
-  getClass(...args: Input): Instance;
+  getInstance(...args: Input): Instance;
 }
 
 export interface GoogleCampaign {
@@ -240,24 +239,24 @@ export interface IAppEventProxy {
   subscribeToEvent(eventName: APP_ENV, handler: any): Subscription;
 }
 
-export interface RedisReadGateway extends BaseRedisGateway {
-  get(key: string): Promise<string>;
-  getByEntityId(entityId: string | number): Promise<any>;
-  hGetAll(key: string): Promise<any>;
-  getHash(hashKey: string, field: string): Promise<string>;
-}
+// export interface RedisReadGateway extends BaseRedisGateway {
+//   get(key: string): Promise<string>;
+//   getByEntityId(entityId: string | number): Promise<any>;
+//   hGetAll(key: string): Promise<any>;
+//   getHash(hashKey: string, field: string): Promise<string>;
+// }
 
 export interface IEventTranslator {
   translate(childEvent: APP_ENV): APP_ENV[];
 }
 
-export interface RedisWriteGateway extends BaseRedisGateway {
-  set(key: string, data: string, ttl?: number): Promise<void>;
-  setByEntityId(entityId: string | number, data: string, ttl?: number);
-  setHash(hashKey: string, field: string, value: string): Promise<void>;
-  unSet(key: string): Promise<void>;
-  hmSet(key: string, objectData: object, ttl?: number): Promise<void>;
-}
+// export interface RedisWriteGateway extends BaseRedisGateway {
+//   set(key: string, data: string, ttl?: number): Promise<void>;
+//   setByEntityId(entityId: string | number, data: string, ttl?: number);
+//   setHash(hashKey: string, field: string, value: string): Promise<void>;
+//   unSet(key: string): Promise<void>;
+//   hmSet(key: string, objectData: object, ttl?: number): Promise<void>;
+// }
 
 export interface HashUtil {
   hash(content: string | Buffer, hashBits?: number): string;
@@ -268,9 +267,10 @@ export interface Subscription {
 }
 
 export interface ILogger {
-  info(message: string, ...args: any): void;
-  error(message: string, ...args: any): void;
-  warn(message: string, ...args: any): void;
+  info(message: string, ...args: any[]): void;
+  debug(message: string, ...args: any[]): void;
+  error(message: string, ...args: any[]): void;
+  warn(message: string, ...args: any[]): void;
 }
 
 export interface HttpClient {

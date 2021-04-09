@@ -45,7 +45,7 @@ let RabbitMqClientRegistry = class RabbitMqClientRegistry {
             return;
         });
     }
-    getClass(connectionName, channelName) {
+    getInstance(connectionName, channelName) {
         const client = this.connectionMap.get(connectionName);
         if (!client) {
             throw new Error(`Connection name ${connectionName} not configured!`);

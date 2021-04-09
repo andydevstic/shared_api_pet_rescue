@@ -21,8 +21,14 @@ let Log4JsLogger = class Log4JsLogger {
     constructor(config) {
         this.loggerMap = new Map();
         Log4JS.configure(config.get('log.log4js') || config.get('log'));
+        const envLogLevel = process.env.LOG_LEVEL;
+        if (envLogLevel && !constants_1.LOG_LEVELS[envLogLevel.toUpperCase()]) {
+            throw new Error(`Log level ${envLogLevel} not supported`);
+        }
+        this.logLevel = envLogLevel || constants_1.LOG_LEVELS.INFO;
+        this.appLogger = this.createInstance(this.logLevel, 'APP');
     }
-    createInstance(logLevel = constants_1.LOG_LEVELS.INFO, moduleName) {
+    createInstance(logLevel = this.logLevel, moduleName) {
         const hashKey = this.getLoggerHashKey(logLevel, moduleName);
         const existingLogger = this.loggerMap.get(hashKey);
         if (existingLogger) {
@@ -37,13 +43,16 @@ let Log4JsLogger = class Log4JsLogger {
         return `${level}:${moduleName || ''}`;
     }
     info(message, ...args) {
-        return this.createInstance().info(message, ...args);
+        return this.appLogger.info(message, ...args);
     }
     warn(message, ...args) {
-        return this.createInstance().warn(message, ...args);
+        return this.appLogger.warn(message, ...args);
+    }
+    debug(message, ...args) {
+        return this.appLogger.debug(message, ...args);
     }
     error(message, ...args) {
-        return this.createInstance().error(message, ...args);
+        return this.appLogger.error(message, ...args);
     }
 };
 Log4JsLogger = __decorate([

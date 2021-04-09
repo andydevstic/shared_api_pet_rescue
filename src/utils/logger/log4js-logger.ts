@@ -7,15 +7,24 @@ import * as Log4JS from 'log4js';
 @provideSingletonNamed(SHARED_PROVIDER_TYPES.LOGGER, SHARED_PROVIDER_NAMES.LOG4JS)
 export class Log4JsLogger implements ILogger, IFactory<[LOG_LEVELS, LoggingModuleName], ILogger> {
   protected loggerMap: Map<string, ILogger> = new Map();
+  protected appLogger: ILogger;
+  protected logLevel: LOG_LEVELS;
 
   constructor(
     @inject(SHARED_PLACEHOLDER_TYPES.CONFIG)
     config: Configuration,
   ) {
     Log4JS.configure(config.get('log.log4js') || config.get('log'));
+    const envLogLevel = process.env.LOG_LEVEL as LOG_LEVELS;
+    if (envLogLevel && !LOG_LEVELS[envLogLevel.toUpperCase()]) {
+      throw new Error(`Log level ${envLogLevel} not supported`);
+    }
+
+    this.logLevel = envLogLevel || LOG_LEVELS.INFO;
+    this.appLogger = this.createInstance(this.logLevel, 'APP');
   }
 
-  public createInstance(logLevel = LOG_LEVELS.INFO, moduleName?: string): ILogger {
+  public createInstance(logLevel = this.logLevel, moduleName?: string): ILogger {
     const hashKey = this.getLoggerHashKey(logLevel, moduleName);
     const existingLogger = this.loggerMap.get(hashKey);
     if (existingLogger) {
@@ -35,14 +44,18 @@ export class Log4JsLogger implements ILogger, IFactory<[LOG_LEVELS, LoggingModul
   }
 
   public info(message?: string, ...args: any[]): void {
-    return this.createInstance().info(message, ...args);
+    return this.appLogger.info(message, ...args);
   }
 
   public warn(message?: string, ...args: any[]): void {
-    return this.createInstance().warn(message, ...args);
+    return this.appLogger.warn(message, ...args);
+  }
+
+  public debug(message?: string, ...args: any[]): void {
+    return this.appLogger.debug(message, ...args);
   }
 
   public error(message?: string, ...args: any[]): void {
-    return this.createInstance().error(message, ...args);
+    return this.appLogger.error(message, ...args);
   }
 }
