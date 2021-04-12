@@ -31,7 +31,7 @@ let DatabaseGateway = class DatabaseGateway {
             const dbConnection = this.connectionMap.get(hashKey);
             return dbConnection;
         }
-        throw new Error(`Connection for hash key ${hashKey} not exist`);
+        throw new Error(`Connection for hash key ${dbName} not exist`);
     }
     registerConnection(dbName, connection, connectionType) {
         const connectionHashKey = this.getConnectionHashKey(dbName, connectionType);

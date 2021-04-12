@@ -10,7 +10,6 @@ import {
   InMemmoryGatewayNames,
   SCHEDULED_TASKS,
   TASK_SCHEDULER_RULES,
-  VALIDATION_SCHEMAS,
   WorkerEventAction,
   WORKER_EVENT_ENTITY_NAMES,
 } from './constants';
@@ -90,7 +89,7 @@ export interface HasId {
 }
 
 export interface Validator {
-  validate(schemaName: VALIDATION_SCHEMAS, payload: any): ValidationResult;
+  validate(schemaName: string, payload: any): ValidationResult;
 }
 
 export interface ValidationResult {
@@ -264,6 +263,16 @@ export interface IEventTranslator {
 
 export interface HashUtil {
   hash(content: string | Buffer, hashBits?: number): string;
+  verify?(hashedData: string): boolean;
+}
+
+export interface IHttpRequestUtil {
+  getAuthTokenFromHeader(): string;
+}
+
+export interface IEncodeDecodeUtil {
+  encode<T>(data: string | Buffer, options?: T): Promise<string>;
+  decode<R>(data: string): R;
 }
 
 export interface Subscription {

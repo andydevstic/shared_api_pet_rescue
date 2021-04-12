@@ -23,7 +23,7 @@ export abstract class DatabaseGateway {
       return dbConnection;
     }
 
-    throw new Error(`Connection for hash key ${hashKey} not exist`);
+    throw new Error(`Connection for hash key ${dbName} not exist`);
   }
 
   protected registerConnection<T>(dbName: string, connection: T, connectionType?: DB_CONNECTION_TYPES) {

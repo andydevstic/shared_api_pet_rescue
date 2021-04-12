@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CustomErrors = exports.CURRENCIES = exports.FILTER_OPERATORS = exports.SHARED_WORKFLOW_NAMES = exports.WORKER_EVENT_ENTITY_NAMES = exports.APP_ENV = exports.SHARED_PLACEHOLDER_NAMES = exports.SHARED_PROVIDER_NAMES = exports.DB_CONNECTION_TYPES = exports.APP_EVENTS = exports.WorkerEventAction = exports.GatewayTypes = exports.InMemmoryGatewayNames = exports.SORT_DIRECTIONS = exports.VALIDATION_SCHEMAS = exports.SEQUELIZE_OPERATOR_ALIASES = exports.SCHEDULED_TASKS = exports.TASK_SCHEDULER_RULES = exports.EXCEL_FONTS = exports.LOG_LEVELS = exports.SHARED_PLACEHOLDER_TYPES = exports.SHARED_PROVIDER_TYPES = void 0;
+exports.CustomErrors = exports.CURRENCIES = exports.FILTER_OPERATORS = exports.SHARED_WORKFLOW_NAMES = exports.WORKER_EVENT_ENTITY_NAMES = exports.APP_ENV = exports.SHARED_PLACEHOLDER_NAMES = exports.SHARED_PROVIDER_NAMES = exports.DB_CONNECTION_TYPES = exports.APP_EVENTS = exports.WorkerEventAction = exports.GatewayTypes = exports.InMemmoryGatewayNames = exports.SORT_DIRECTIONS = exports.SEQUELIZE_OPERATOR_ALIASES = exports.SCHEDULED_TASKS = exports.TASK_SCHEDULER_RULES = exports.EXCEL_FONTS = exports.LOG_LEVELS = exports.SHARED_PLACEHOLDER_TYPES = exports.SHARED_PROVIDER_TYPES = void 0;
 const sequelize_1 = require("sequelize");
 exports.SHARED_PROVIDER_TYPES = {
     CONFIG: Symbol.for('CONFIG'),
@@ -85,14 +85,6 @@ exports.SEQUELIZE_OPERATOR_ALIASES = {
     $values: sequelize_1.Op.values,
     $col: sequelize_1.Op.col,
 };
-var VALIDATION_SCHEMAS;
-(function (VALIDATION_SCHEMAS) {
-    VALIDATION_SCHEMAS["FIND_USERS"] = "FIND_USERS";
-    VALIDATION_SCHEMAS["PAGINATE_USERS"] = "PAGINATE_USERS";
-    VALIDATION_SCHEMAS["FIND_FIELDS"] = "FIND_FIELDS";
-    VALIDATION_SCHEMAS["FILTER"] = "FILTER";
-    VALIDATION_SCHEMAS["SORT"] = "SORT";
-})(VALIDATION_SCHEMAS = exports.VALIDATION_SCHEMAS || (exports.VALIDATION_SCHEMAS = {}));
 var SORT_DIRECTIONS;
 (function (SORT_DIRECTIONS) {
     SORT_DIRECTIONS["ASC"] = "ascending";
@@ -129,9 +121,11 @@ exports.SHARED_PROVIDER_NAMES = {
     TABLE_DATA_GATEWAY: 'TABLE_DATA_GATEWAY',
     INMEMMORY_GATEWAY: 'INMEMMORY_GATEWAY',
     AXIOS: 'AXIOS',
+    JWT: 'JWT',
     EXCEL: 'EXCEL',
     MONGO_OPTIONS: 'MONGO_OPTIONS',
     EXCEL_STYLE: 'EXCEL_STYLE',
+    HTTP_REQUEST: 'HTTP_REQUEST',
     NUMBER: 'NUMBER',
     LOG4JS: 'LOG4JS',
     WORKER_EVENT_SERVICE: 'WORKER_EVENT_SERVICE',

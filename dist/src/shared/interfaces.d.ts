@@ -3,7 +3,7 @@ import * as stream from 'stream';
 import { Transaction } from 'sequelize';
 import { EventEmitter } from 'events';
 import { Style, CellValue, Borders, AddWorksheetOptions, Cell, Alignment, Border, Font, Row } from 'exceljs';
-import { APP_ENV, EXCEL_FONTS, FILTER_OPERATORS, GatewayTypes, InMemmoryGatewayNames, SCHEDULED_TASKS, TASK_SCHEDULER_RULES, VALIDATION_SCHEMAS, WorkerEventAction, WORKER_EVENT_ENTITY_NAMES } from './constants';
+import { APP_ENV, EXCEL_FONTS, FILTER_OPERATORS, GatewayTypes, InMemmoryGatewayNames, SCHEDULED_TASKS, TASK_SCHEDULER_RULES, WorkerEventAction, WORKER_EVENT_ENTITY_NAMES } from './constants';
 import { WorksheetUtil } from '@src.shared/utils/excels/worksheet-utils';
 import { Options } from 'amqplib';
 export declare type TaskFunction = () => any;
@@ -63,7 +63,7 @@ export interface HasId {
     id: string | number;
 }
 export interface Validator {
-    validate(schemaName: VALIDATION_SCHEMAS, payload: any): ValidationResult;
+    validate(schemaName: string, payload: any): ValidationResult;
 }
 export interface ValidationResult {
     valid: boolean;
@@ -192,6 +192,14 @@ export interface IEventTranslator {
 }
 export interface HashUtil {
     hash(content: string | Buffer, hashBits?: number): string;
+    verify?(hashedData: string): boolean;
+}
+export interface IHttpRequestUtil {
+    getAuthTokenFromHeader(): string;
+}
+export interface IEncodeDecodeUtil {
+    encode<T>(data: string | Buffer, options?: T): Promise<string>;
+    decode<R>(data: string): R;
 }
 export interface Subscription {
     unsubscribe(): void;

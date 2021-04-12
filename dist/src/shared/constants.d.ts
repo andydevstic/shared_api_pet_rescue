@@ -77,13 +77,6 @@ export declare const SEQUELIZE_OPERATOR_ALIASES: {
     $values: symbol;
     $col: symbol;
 };
-export declare enum VALIDATION_SCHEMAS {
-    FIND_USERS = "FIND_USERS",
-    PAGINATE_USERS = "PAGINATE_USERS",
-    FIND_FIELDS = "FIND_FIELDS",
-    FILTER = "FILTER",
-    SORT = "SORT"
-}
 export declare enum SORT_DIRECTIONS {
     ASC = "ascending",
     DESC = "descending"
@@ -114,9 +107,11 @@ export declare const SHARED_PROVIDER_NAMES: {
     TABLE_DATA_GATEWAY: string;
     INMEMMORY_GATEWAY: string;
     AXIOS: string;
+    JWT: string;
     EXCEL: string;
     MONGO_OPTIONS: string;
     EXCEL_STYLE: string;
+    HTTP_REQUEST: string;
     NUMBER: string;
     LOG4JS: string;
     WORKER_EVENT_SERVICE: string;
