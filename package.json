@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc --clean --require ts-node/register --require reflect-metadata/Reflect --extension .ts -- mocha --config ./mocharc.js --exit --timeout 5000",
     "test:all": "npm test ./tests/**/*.spec.ts",
-    "build": "rm -rf dist && tsc && node dist/index.js",
+    "build": "rm -rf dist && tsc && node --experimental-modules dist/index.js",
     "build:api": "yarn build && rm -rf ../api_pet_rescue/node_modules/shared.api.pet_rescue/dist && cp -rf ./dist ../api_pet_rescue/node_modules/shared.api.pet_rescue/",
     "deploy:test": "yarn build && rm -rf ../api_pet_rescue/node_modules/shared.api.pet_rescue/dist && cp -rf ./dist ../api_pet_rescue/node_modules/shared.api.pet_rescue/",
     "deploy": "npm run build && git add . && git commit -m \"deploy new code\" && git push origin master"
@@ -31,6 +31,7 @@
     "module-alias": "^2.2.2",
     "moment": "^2.27.0",
     "mongoose": "^5.12.3",
+    "randomstring": "^1.1.5",
     "reflect-metadata": "0.1.12",
     "sequelize": "^6.5.0",
     "sequelize-typescript": "^2.0.0",
@@ -46,6 +47,7 @@
     "@types/lru-cache": "^5.1.0",
     "@types/mocha": "^8.2.0",
     "@types/module-alias": "^2.0.0",
+    "@types/randomstring": "^1.1.6",
     "@types/redis": "^2.8.27",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",

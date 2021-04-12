@@ -104,6 +104,7 @@ export declare const SHARED_PROVIDER_NAMES: {
     HTTP: string;
     OBJECT: string;
     RABBITMQ_CLIENT: string;
+    RANDOM_STRING_GENERATOR: string;
     TABLE_DATA_GATEWAY: string;
     INMEMMORY_GATEWAY: string;
     AXIOS: string;

@@ -183,6 +183,12 @@ export interface IEventEmitter {
     emit: EventEmitter['emit'];
     removeListener: EventEmitter['removeListener'];
 }
+export interface GeneratorUtil {
+    generate(options?: {
+        length?: number;
+        charset?: 'hex' | 'numeric' | 'alphanumeric';
+    }): string;
+}
 export interface IAppEventProxy {
     emitEvent(eventName: APP_ENV, payload: any): void;
     subscribeToEvent(eventName: APP_ENV, handler: any): Subscription;
