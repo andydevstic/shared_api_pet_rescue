@@ -5,7 +5,18 @@ import * as Fnv1 from 'fnv-plus';
 
 @provideSingletonNamed(SHARED_PROVIDER_TYPES.UTIL, SHARED_PROVIDER_NAMES.FNV_HASH)
 export class FnvHashUtil implements HashUtil {
-  public hash(content: string | Buffer, hashBits?: number): string {
-    return Fnv1.hash(content, hashBits || 52).hex();
+  public hash(content: string | Buffer, hashBits?: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      try {
+        const hashed = Fnv1.hash(content, hashBits || 52).hex();
+        resolve(hashed);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public verify(rawData: string, hashedData: string): Promise<boolean> {
+    return Promise.resolve(true);
   }
 }

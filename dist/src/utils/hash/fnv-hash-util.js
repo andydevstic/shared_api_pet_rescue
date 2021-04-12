@@ -12,7 +12,18 @@ const constants_1 = require("@src.shared/shared/constants");
 const Fnv1 = require("fnv-plus");
 let FnvHashUtil = class FnvHashUtil {
     hash(content, hashBits) {
-        return Fnv1.hash(content, hashBits || 52).hex();
+        return new Promise((resolve, reject) => {
+            try {
+                const hashed = Fnv1.hash(content, hashBits || 52).hex();
+                resolve(hashed);
+            }
+            catch (error) {
+                reject(error);
+            }
+        });
+    }
+    verify(rawData, hashedData) {
+        return Promise.resolve(true);
     }
 };
 FnvHashUtil = __decorate([

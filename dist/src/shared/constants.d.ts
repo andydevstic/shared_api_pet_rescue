@@ -109,6 +109,7 @@ export declare const SHARED_PROVIDER_NAMES: {
     AXIOS: string;
     JWT: string;
     EXCEL: string;
+    BCRYPT: string;
     MONGO_OPTIONS: string;
     EXCEL_STYLE: string;
     HTTP_REQUEST: string;

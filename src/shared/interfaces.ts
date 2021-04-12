@@ -262,8 +262,8 @@ export interface IEventTranslator {
 // }
 
 export interface HashUtil {
-  hash(content: string | Buffer, hashBits?: number): string;
-  verify?(hashedData: string): boolean;
+  hash(content: string | Buffer, ...args: any[]): Promise<string>;
+  verify(rawData: string | Buffer, encryptedData: string): Promise<boolean>;
 }
 
 export interface IHttpRequestUtil {
